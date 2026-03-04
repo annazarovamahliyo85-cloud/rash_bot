@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tarix MS Test</title>
+<style>
+body { font-family: Arial; text-align: center; margin: 20px; }
+table { margin: auto; border-collapse: collapse; }
+td, th { border: 1px solid #aaa; padding: 6px; }
+button { margin-top: 20px; padding: 10px 20px; background: #2196F3; color: white; border: none; }
+</style>
+</head>
+<body>
+
+<h2>Tarix MS test</h2>
+<p>Javoblaringizni belgilang:</p>
+
+<table>
+<tr>
+<th>№</th><th>A</th><th>B</th><th>C</th><th>D</th>
+</tr>
+
+<script>
+for(let i=1;i<=10;i++){
+    document.write("<tr><td>"+i+"</td>");
+    ["A","B","C","D"].forEach(letter=>{
+        document.write(`<td><input type='radio' name='q${i}' value='${letter}'></td>`);
+    });
+    document.write("</tr>");
+}
+</script>
+
+</table>
+
+<br>
+<button onclick="submitTest()">OK</button>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script>
+function submitTest(){
+    let answers = [];
+    for(let i=1;i<=10;i++){
+        let radios = document.getElementsByName('q'+i);
+        let selected = "-";
+        for(let r of radios){
+            if(r.checked) selected = r.value;
+        }
+        answers.push(selected);
+    }
+
+    Telegram.WebApp.sendData(JSON.stringify(answers));
+}
+</script>
+
+</body>
+                                                            </html>
